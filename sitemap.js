@@ -29,7 +29,7 @@ SalesforceInteractions.init({
 
     SalesforceInteractions.initSitemap(sitemapConfig);
      // Listener to log all clicks for debugging and troubleshooting
-
+    //test
     document.addEventListener("click", (e) => {
         console.log("CLICK: " + SalesforceInteractions.cashDom(e.target).text().toUpperCase());
     });
