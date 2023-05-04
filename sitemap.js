@@ -1,5 +1,28 @@
+function findMyLocationHome(myUrl){
+    let url = myUrl.split('/');
+    if(url[2] === "sales-staging.ahm.ninja" && (/^\/$/).test(window.location.pathname)){
+      
+      return true;
+    }
+    else{
+      
+      return false;
+    }
+}
+function findMyLocationOthers(myUrl){
+    let url = myUrl.split('/');
+    if(url[2] === "members-staging.ahm.ninja" && (/^\/$/).test(window.location.pathname)){
+      
+      return true;
+    }
+    else{
+      
+      return false;
+    }
+}
+
 SalesforceInteractions.init({
-    cookieDomain: "sales-staging.ahm.ninja"
+    cookieDomain: "ahm.ninja"
 }).then(() => {
     const sitemapConfig = {
         global: {
@@ -24,8 +47,14 @@ SalesforceInteractions.init({
             {
                 // https://sales-staging.ahm.ninja/
                 name: "home",
-                isMatch: () => (/^\/$/).test(window.location.pathname),
+                isMatch: () => findMyLocationHome(window.location.href),
                 interaction: {name: "View Homepage"}
+            },
+            {
+                // https://members-staging.ahm.ninja/
+                name: "health_login",
+                isMatch: () => findMyLocationOthers(window.location.href),
+                interaction: {name: "View Health Login"}
             },
             {
                 //https://sales-staging.ahm.ninja/perks/specsavers
@@ -45,7 +74,42 @@ SalesforceInteractions.init({
                 isMatch: () => (/^\/perks$/).test(window.location.pathname),
                 interaction: {name: "View perks"}
             },
-            
+            {
+                //https://sales-staging.ahm.ninja/health-insurance/no-gap-dental-check-ups
+                name: "needs_type",
+                isMatch: () => (/\/health-insurance\/no-gap-dental-check-ups/).test(window.location.pathname),
+                interaction: {name: "View Item No Gap Dental"}
+            },
+            {
+                //https://sales-staging.ahm.ninja/health-insurance/no-gap-dental-check-ups
+                name: "needs_type",
+                isMatch: () => (/\/tax/).test(window.location.pathname),
+                interaction: {name: "View Item Tax and Hospital"}
+            },
+            {
+                //https://sales-staging.ahm.ninja/pregnancy
+                name: "needs_type",
+                isMatch: () => (/\/pregnancy/).test(window.location.pathname),
+                interaction: {name: "View Item Pregnancy"}
+            },
+            {
+                //https://sales-staging.ahm.ninja/youth-discount
+                name: "needs_type",
+                isMatch: () => (/\/youth-discount/).test(window.location.pathname),
+                interaction: {name: "View Item Youth Discount"}
+            },
+            {
+                //https://sales-staging.ahm.ninja/health-insurance/bare-bones-cover
+                name: "needs_type",
+                isMatch: () => (/\/health-insurance\/bare-bones-cover/).test(window.location.pathname),
+                interaction: {name: "View Item Bare Bones"}
+            },
+            {
+                //https://sales-staging.ahm.ninja/health-insurance/family-cover
+                name: "needs_type",
+                isMatch: () => (/\/health-insurance\/family-cover/).test(window.location.pathname),
+                interaction: {name: "View Item Family"}
+            },
             {
                 //https://sales-staging.ahm.ninja/health-insurance/hospital-cover/starter-silver
                 name: "phi",
@@ -69,6 +133,18 @@ SalesforceInteractions.init({
                 name: "phi",
                 isMatch: () => (/\/hospital-extras-bundle\/advanced-hospital-gold-super-extras/).test(window.location.pathname),
                 interaction: {name: "View Item Combined"}
+            },
+            {
+                //https://sales-staging.ahm.ninja/health-insurance/buy/cover
+                name: "quote_cover",
+                isMatch: () => (/\/health-insurance\/buy\/cover/).test(window.location.pathname),
+                interaction: {name: "View Quote - Cover"}
+            },
+            {
+                //https://help.ahm.com.au/
+                name: "help",
+                isMatch: () => (/help.ahm.com.au/).test(window.location.href),
+                interaction: {name: "View Help"}
             },
             {
                 //https://sales-staging.ahm.ninja/health-insurance
