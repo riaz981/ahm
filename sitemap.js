@@ -32,6 +32,9 @@ SalesforceInteractions.init({
                 return actionEvent;
 
             },
+            contentZones:[
+                {name: "global_chatbot", selector:".styles_liveChat__NXnzA"}
+            ],
             listeners: [
 
             ]
@@ -46,7 +49,10 @@ SalesforceInteractions.init({
                 // https://sales-staging.ahm.ninja/
                 name: "home",
                 isMatch: () => findMyLocationHome(),
-                interaction: {name: "View Homepage"}
+                interaction: {name: "View Homepage"},
+                contentZones:[
+                    {name: "home_hero", selector:"#main .styles__wrapper___3roa7 .styles__boxed___1wvhc:nth-of-type(1)"}
+                ]
             },
             {
                 // https://members-staging.ahm.ninja/
