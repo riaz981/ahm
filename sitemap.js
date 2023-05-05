@@ -1,6 +1,5 @@
-function findMyLocationHome(myUrl){
-    let url = myUrl.split('/');
-    if(url[2] === "sales-staging.ahm.ninja" && (/^\/$/).test(window.location.pathname)){
+function findMyLocationHome(){
+    if(window.location.hostname.match("sales-staging.ahm.ninja") && (/^\/$/).test(window.location.pathname)){
       
       return true;
     }
@@ -9,9 +8,8 @@ function findMyLocationHome(myUrl){
       return false;
     }
 }
-function findMyLocationOthers(myUrl){
-    let url = myUrl.split('/');
-    if(url[2] === "members-staging.ahm.ninja" && (/^\/$/).test(window.location.pathname)){
+function findMyLocationOthers(){
+    if(window.location.hostname.match("members-staging.ahm.ninja") && (/^\/$/).test(window.location.pathname)){
       
       return true;
     }
@@ -47,14 +45,20 @@ SalesforceInteractions.init({
             {
                 // https://sales-staging.ahm.ninja/
                 name: "home",
-                isMatch: () => findMyLocationHome(window.location.href),
+                isMatch: () => findMyLocationHome(),
                 interaction: {name: "View Homepage"}
             },
             {
                 // https://members-staging.ahm.ninja/
                 name: "health_login",
-                isMatch: () => findMyLocationOthers(window.location.href),
+                isMatch: () => findMyLocationOthers(),
                 interaction: {name: "View Health Login"}
+            },
+            {
+                // https://members-staging.ahm.ninja/
+                name: "health_register",
+                isMatch: () => (/\/register/).test(window.location.pathname),
+                interaction: {name: "View Health Register"}
             },
             {
                 //https://sales-staging.ahm.ninja/perks/specsavers
