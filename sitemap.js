@@ -1,3 +1,4 @@
+
 function findMyLocationHome(){
     if(window.location.hostname.match("sales-staging.ahm.ninja") && (/^\/$/).test(window.location.pathname)){
       
@@ -32,11 +33,13 @@ SalesforceInteractions.init({
                 return actionEvent;
 
             },
-            contentZones:[
-                {name: "global_chatbot", selector:".styles_liveChat__NXnzA"}
-            ],
             listeners: [
-
+            ],
+            contentZones:[
+                {
+                    name: "global_chatbot", 
+                    selector: ".styles__image___1EftK"
+                }
             ]
         },
         pageTypeDefault: {
@@ -58,7 +61,13 @@ SalesforceInteractions.init({
                 // https://members-staging.ahm.ninja/
                 name: "health_login",
                 isMatch: () => findMyLocationOthers(),
-                interaction: {name: "View Health Login"}
+                interaction: {name: "View Health Login"},
+                listeners:[
+                    SalesforceInteractions.listener("click", "form button", () => {
+                        const memberId = SalesforceInteractions.cashDom("#username").val();
+                        console.log("MemberId "+memberId);
+                    })
+                ]
             },
             {
                 // https://members-staging.ahm.ninja/
@@ -149,6 +158,18 @@ SalesforceInteractions.init({
                 name: "quote_cover",
                 isMatch: () => (/\/health-insurance\/buy\/cover/).test(window.location.pathname),
                 interaction: {name: "View Quote - Cover"}
+            },
+            {
+                //https://sales-staging.ahm.ninja/health-insurance/buy/email
+                name: "quote_started",
+                isMatch: () => (/\/health-insurance\/buy\/email/).test(window.location.pathname),
+                interaction: {name: "View Quote - Started"},
+                listeners:[
+                    SalesforceInteractions.listener("click", "form button", () => {
+                        const email = SalesforceInteractions.cashDom("#email").val();
+                        console.log("Email is " + email);
+                    })
+                ]
             },
             {
                 //https://help.ahm.com.au/
