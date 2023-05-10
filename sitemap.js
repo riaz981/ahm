@@ -97,61 +97,122 @@ SalesforceInteractions.init({
                 //https://sales-staging.ahm.ninja/health-insurance/no-gap-dental-check-ups
                 name: "needs_type",
                 isMatch: () => (/\/health-insurance\/no-gap-dental-check-ups/).test(window.location.pathname),
-                interaction: {name: "View Item No Gap Dental"}
+                interaction: {
+                    name: SalesforceInteractions.CatalogObjectInteractionName.ViewCatalogObject,
+                    catalogObject: {
+                        type: "NeedsType",
+                        id: SalesforceInteractions.resolvers.fromWindow("location.pathname", (path) => path.split("/")[2].toLowerCase())
+                    }
+                }
             },
             {
-                //https://sales-staging.ahm.ninja/health-insurance/no-gap-dental-check-ups
+                //https://sales-staging.ahm.ninja/tax
                 name: "needs_type",
                 isMatch: () => (/\/tax/).test(window.location.pathname),
-                interaction: {name: "View Item Tax and Hospital"}
+                interaction: {
+                    name: SalesforceInteractions.CatalogObjectInteractionName.ViewCatalogObject,
+                    catalogObject: {
+                        type: "NeedsType",
+                        id: SalesforceInteractions.resolvers.fromWindow("location.pathname", (path) => path.replaceAll("/","").toLowerCase())
+
+                    }
+                }
             },
             {
                 //https://sales-staging.ahm.ninja/pregnancy
                 name: "needs_type",
                 isMatch: () => (/\/pregnancy/).test(window.location.pathname),
-                interaction: {name: "View Item Pregnancy"}
+                interaction: {
+                    name: SalesforceInteractions.CatalogObjectInteractionName.ViewCatalogObject,
+                    catalogObject: {
+                        type: "NeedsType",
+                        id: SalesforceInteractions.resolvers.fromWindow("location.pathname", (path) => path.replaceAll("/","").toLowerCase())
+                    }
+                }
             },
             {
                 //https://sales-staging.ahm.ninja/youth-discount
                 name: "needs_type",
                 isMatch: () => (/\/youth-discount/).test(window.location.pathname),
-                interaction: {name: "View Item Youth Discount"}
+                interaction: {
+                    name: SalesforceInteractions.CatalogObjectInteractionName.ViewCatalogObject,
+                    catalogObject: {
+                        type: "NeedsType",
+                        id: SalesforceInteractions.resolvers.fromWindow("location.pathname", (path) => path.replaceAll("/","").toLowerCase())
+                    }
+                }
             },
             {
                 //https://sales-staging.ahm.ninja/health-insurance/bare-bones-cover
                 name: "needs_type",
                 isMatch: () => (/\/health-insurance\/bare-bones-cover/).test(window.location.pathname),
-                interaction: {name: "View Item Bare Bones"}
+                interaction: {
+                    name: SalesforceInteractions.CatalogObjectInteractionName.ViewCatalogObject,
+                    catalogObject: {
+                        type: "NeedsType",
+                        id: SalesforceInteractions.resolvers.fromWindow("location.pathname", (path) => path.split("/")[2].toLowerCase())
+                    }
+                }
             },
             {
                 //https://sales-staging.ahm.ninja/health-insurance/family-cover
                 name: "needs_type",
                 isMatch: () => (/\/health-insurance\/family-cover/).test(window.location.pathname),
-                interaction: {name: "View Item Family"}
+                interaction: {
+                    name: SalesforceInteractions.CatalogObjectInteractionName.ViewCatalogObject,
+                    catalogObject: {
+                        type: "NeedsType",
+                        id: SalesforceInteractions.resolvers.fromWindow("location.pathname", (path) => path.split("/")[2].toLowerCase())
+                    }
+                }
             },
             {
                 //https://sales-staging.ahm.ninja/health-insurance/hospital-cover/starter-silver
                 name: "phi",
                 isMatch: () => (/\/starter-silver$/).test(window.location.pathname),
-                interaction: {name: "View Item Hospital"}
+                interaction: {
+                    name: SalesforceInteractions.CatalogObjectInteractionName.ViewCatalogObject,
+                    catalogObject: {
+                        type: "Product",
+                        id: SalesforceInteractions.resolvers.fromWindow("location.pathname", (path) => path.split("/")[2].toLowerCase())
+                    }
+                }
             },
             {
                 //https://sales-staging.ahm.ninja/health-insurance/extras-cover/black-70-extras
                 name: "phi",
                 isMatch: () => (/\/extras-cover\/black-70-extras/).test(window.location.pathname),
-                interaction: {name: "View Item Extras"}
+                interaction: {
+                    name: SalesforceInteractions.CatalogObjectInteractionName.ViewCatalogObject,
+                    catalogObject: {
+                        type: "Product",
+                        id: SalesforceInteractions.resolvers.fromWindow("location.pathname", (path) => path.split("/")[2].toLowerCase())
+                    }
+                }
             },
             {
                 //https://sales-staging.ahm.ninja/health-insurance/hospital-extras-packages/classic-flexi-silver-plus
                 name: "phi",
                 isMatch: () => (/\/hospital-extras-packages\/classic-flexi-silver-plus/).test(window.location.pathname),
-                interaction: {name: "View Item Package"}
+                interaction: {
+                    name: SalesforceInteractions.CatalogObjectInteractionName.ViewCatalogObject,
+                    catalogObject: {
+                        type: "Product",
+                        id: SalesforceInteractions.resolvers.fromWindow("location.pathname", (path) => path.split("/")[2].toLowerCase())
+                    }
+                }
             },
             {
                 //https://sales-staging.ahm.ninja/health-insurance/hospital-extras-bundle/advanced-hospital-gold-super-extras
                 name: "phi",
                 isMatch: () => (/\/hospital-extras-bundle\/advanced-hospital-gold-super-extras/).test(window.location.pathname),
-                interaction: {name: "View Item Combined"}
+                interaction: {
+                    name: SalesforceInteractions.CatalogObjectInteractionName.ViewCatalogObject,
+                    catalogObject: {
+                        type: "Product",
+                        id: SalesforceInteractions.resolvers.fromWindow("location.pathname", (path) => path.split("/")[2].toLowerCase())
+                    }
+                }
             },
             {
                 //https://sales-staging.ahm.ninja/health-insurance/buy/cover
@@ -181,34 +242,64 @@ SalesforceInteractions.init({
                 //https://sales-staging.ahm.ninja/health-insurance
                 name: "category",
                 isMatch: () => (/\/health-insurance$/).test(window.location.pathname),
-                interaction: {name: "View Health Insurance"}
+                interaction: {
+                    name: SalesforceInteractions.CatalogObjectInteractionName.ViewCatalogObject,
+                    catalogObject: {
+                        type: "Category",
+                        id: SalesforceInteractions.resolvers.fromWindow("location.pathname", (path) => path.replaceAll("/","").toLowerCase())
+                    }
+                }
             }
             ,
             {
                 //https://sales-staging.ahm.ninja/travel-insurance
                 name: "category",
                 isMatch: () => (/\/travel-insurance$/).test(window.location.pathname),
-                interaction: {name: "View Travel Insurance"}
+                interaction: {
+                    name: SalesforceInteractions.CatalogObjectInteractionName.ViewCatalogObject,
+                    catalogObject: {
+                        type: "Category",
+                        id: SalesforceInteractions.resolvers.fromWindow("location.pathname", (path) => path.replaceAll("/","").toLowerCase())
+                    }
+                }
             },
             {
                 //https://sales-staging.ahm.ninja/car-insurance
                 name: "category",
                 isMatch: () => (/\/car-insurance$/).test(window.location.pathname),
-                interaction: {name: "View Car Insurance"}
+                interaction: {
+                    name: SalesforceInteractions.CatalogObjectInteractionName.ViewCatalogObject,
+                    catalogObject: {
+                        type: "Category",
+                        id: SalesforceInteractions.resolvers.fromWindow("location.pathname", (path) => path.replaceAll("/","").toLowerCase())
+                    }
+                }
             }
             ,
             {
                 //https://sales-staging.ahm.ninja/home-insurance
                 name: "category",
                 isMatch: () => (/\/home-insurance$/).test(window.location.pathname),
-                interaction: {name: "View Home Insurance"}
+                interaction: {
+                    name: SalesforceInteractions.CatalogObjectInteractionName.ViewCatalogObject,
+                    catalogObject: {
+                        type: "Category",
+                        id: SalesforceInteractions.resolvers.fromWindow("location.pathname", (path) => path.replaceAll("/","").toLowerCase())
+                    }
+                }
             }
             ,
             {
                 //https://sales-staging.ahm.ninja/life-insurance
                 name: "category",
                 isMatch: () => (/\/life-insurance$/).test(window.location.pathname),
-                interaction: {name: "View Life Insurance"}
+                interaction: {
+                    name: SalesforceInteractions.CatalogObjectInteractionName.ViewCatalogObject,
+                    catalogObject: {
+                        type: "Category",
+                        id: SalesforceInteractions.resolvers.fromWindow("location.pathname", (path) => path.replaceAll("/","").toLowerCase())
+                    }
+                }
             }
             
         ] 
