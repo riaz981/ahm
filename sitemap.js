@@ -300,6 +300,18 @@ SalesforceInteractions.init({
                         id: SalesforceInteractions.resolvers.fromWindow("location.pathname", (path) => path.replaceAll("/","").toLowerCase())
                     }
                 }
+            },
+            {
+                //https://sales-staging.ahm.ninja/car-insurance/login
+                name: "car_login",
+                isMatch: () => (/\/car-insurance\/login/).test(window.location.pathname),
+                interaction: {name: "View Car Login"}
+            },
+            {
+                //https://sales-staging.ahm.ninja/contact-us
+                name: "contact_us",
+                isMatch: () => (/\/contact-us/).test(window.location.pathname),
+                interaction: {name: "View Contact Us"}
             }
             
         ] 
