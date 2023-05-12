@@ -64,16 +64,72 @@ SalesforceInteractions.init({
                 interaction: {name: "View Health Login"},
                 listeners:[
                     SalesforceInteractions.listener("click", "form button", () => {
-                        const memberId = SalesforceInteractions.cashDom("#username").val();
-                        console.log("MemberId "+memberId);
+                        const customerId = SalesforceInteractions.cashDom("#username").val();
+                        console.log("CustomerId "+customerId);
+                        if(customerId){
+                            SalesforceInteractions.sendEvent({
+                                interaction: {
+                                    name: "Health insurance login - customerid"
+                                },
+                                user:{
+                                    identities: {
+                                        customerId: customerId
+                                    }
+                                }
+                            });
+                        }
                     })
                 ]
             },
             {
-                // https://members-staging.ahm.ninja/
+                // https://members-staging.ahm.ninja/register
                 name: "health_register",
                 isMatch: () => (/\/register/).test(window.location.pathname),
-                interaction: {name: "View Health Register"}
+                interaction: {name: "View Health Register"},
+                listeners: [
+
+                    SalesforceInteractions.listener("click", "form button", () => {
+                        const customerId = SalesforceInteractions.cashDom("#username").val();
+                        console.log("CustomerId "+customerId);
+                        if(customerId){
+                            SalesforceInteractions.sendEvent({
+                                interaction: {
+                                    name: "Health insurance register - customerid"
+                                },
+                                user:{
+                                    identities: {
+                                        customerId: customerId
+                                    }
+                                }
+                            });
+                        }
+                    })
+                ]
+
+            },
+            {
+                //https://sales-staging.ahm.ninja/home-insurance/login
+                name: "home_login",
+                isMatch: () => (/\/home-insurance\/login/).test(window.location.pathname),
+                interaction: {name: "View Home Login"},
+                listeners: [
+                    SalesforceInteractions.listener("click", "form button", () => {
+                        const emailAddress = SalesforceInteractions.cashDom("#email").val();
+                        console.log("Email is " + email);
+                        if(emailAddress){
+                            SalesforceInteractions.sendEvent({
+                                interaction: {
+                                    name: "Home insurance login - email"
+                                },
+                                user:{
+                                    identities: {
+                                        emailAddress: emailAddress
+                                    }
+                                }
+                            });
+                        }
+                    })
+                ]
             },
             {
                 //https://sales-staging.ahm.ninja/perks/specsavers
@@ -227,8 +283,20 @@ SalesforceInteractions.init({
                 interaction: {name: "View Quote - Started"},
                 listeners:[
                     SalesforceInteractions.listener("click", "form button", () => {
-                        const email = SalesforceInteractions.cashDom("#email").val();
+                        const emailAddress = SalesforceInteractions.cashDom("#email").val();
                         console.log("Email is " + email);
+                        if(emailAddress){
+                            SalesforceInteractions.sendEvent({
+                                interaction: {
+                                    name: "Buy Insurance Email"
+                                },
+                                user:{
+                                    identities: {
+                                        emailAddress: emailAddress
+                                    }
+                                }
+                            });
+                        }
                     })
                 ]
             },
@@ -305,7 +373,27 @@ SalesforceInteractions.init({
                 //https://sales-staging.ahm.ninja/car-insurance/login
                 name: "car_login",
                 isMatch: () => (/\/car-insurance\/login/).test(window.location.pathname),
-                interaction: {name: "View Car Login"}
+                interaction: {name: "View Car Login"},
+                listeners: [
+                    SalesforceInteractions.listener("click", "form button", () => {
+                        const emailAddress = SalesforceInteractions.cashDom("#email").val();
+                        console.log("Email is " + email);
+                        if(emailAddress){
+                            SalesforceInteractions.sendEvent({
+                                interaction: {
+                                    name: "Car insurance login - email"
+                                },
+                                user:{
+                                    identities: {
+                                        emailAddress: emailAddress
+                                    }
+                                }
+                            });
+                        }
+                    })
+
+
+                ]
             },
             {
                 //https://sales-staging.ahm.ninja/contact-us
