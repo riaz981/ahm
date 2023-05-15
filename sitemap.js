@@ -301,6 +301,43 @@ SalesforceInteractions.init({
                 ]
             },
             {
+                //https://sales-staging.ahm.ninja/health-insurance/buy/about
+                //document.querySelector("form .gJGtch section .styles__isFullWidthMobile___m6K7v .styles__well___34AQ4:nth-child(3) section button[type=submit]");
+
+                name: "quote_about",
+                isMatch: () => (/\/health-insurance\/buy\/about/).test(window.location.pathname),
+                interaction: {name: "View Quote - About"},
+                listeners: [
+                    SalesforceInteractions.listener("click", "form button[type=submit]", () => {
+                        console.log("Next button clicked");
+                        const firstName = String(SalesforceInteractions.cashDom("input#firstName").val().trim());
+                        const lastName = String(SalesforceInteractions.cashDom("input#lastName").val().trim());
+                        const dob = String(SalesforceInteractions.cashDom("input#dob").val().trim());
+                        const mobile = String(SalesforceInteractions.cashDom("input#phoneNumber").val().trim());
+                        const emailAddress = String(SalesforceInteractions.cashDom("input#email").val().trim());
+                        const residentialAddress = String(SalesforceInteractions.cashDom("input#residentialAddress").val().trim());
+                        if(firstName && lastName && dob && mobile && emailAddress && residentialAddress){
+                            SalesforceInteractions.sendEvent({
+                                interaction: {
+                                    name: "About you"
+                                },
+                                user: {
+                                    identities: {
+                                        firstName: firstName,
+                                        lastName: lastName,
+                                        dob: dob,
+                                        mobile: mobile,
+                                        emailAddress: emailAddress,
+                                        residentialAddress: residentialAddress
+                                    }
+                                }
+                            })
+                        }
+                    })
+                ]
+            }
+            ,
+            {
                 //https://help.ahm.com.au/
                 name: "help",
                 isMatch: () => (/help.ahm.com.au/).test(window.location.href),
