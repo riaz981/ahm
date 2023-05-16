@@ -20,6 +20,16 @@ function findMyLocationOthers(){
     }
 }
 
+function getDataLayerId(){
+    let productId = window.dataLayer[3].location.split("/")[1].trim();
+    if(productId){
+        return productId;
+    }
+    else{
+        return false;
+    }
+}
+
 SalesforceInteractions.init({
     cookieDomain: "ahm.ninja"
 }).then(() => {
@@ -230,7 +240,7 @@ SalesforceInteractions.init({
                     name: SalesforceInteractions.CatalogObjectInteractionName.ViewCatalogObject,
                     catalogObject: {
                         type: "Product",
-                        id: SalesforceInteractions.resolvers.fromWindow("location.pathname", (path) => path.split("/")[2].toLowerCase())
+                        id: getDataLayerId()
                     }
                 }
             },
@@ -242,19 +252,23 @@ SalesforceInteractions.init({
                     name: SalesforceInteractions.CatalogObjectInteractionName.ViewCatalogObject,
                     catalogObject: {
                         type: "Product",
-                        id: SalesforceInteractions.resolvers.fromWindow("location.pathname", (path) => path.split("/")[2].toLowerCase())
+                        id: getDataLayerId()
                     }
                 }
             },
             {
                 //https://sales-staging.ahm.ninja/health-insurance/hospital-extras-packages/classic-flexi-silver-plus
+                //
                 name: "phi",
                 isMatch: () => (/\/hospital-extras-packages\/classic-flexi-silver-plus/).test(window.location.pathname),
                 interaction: {
                     name: SalesforceInteractions.CatalogObjectInteractionName.ViewCatalogObject,
                     catalogObject: {
                         type: "Product",
-                        id: SalesforceInteractions.resolvers.fromWindow("location.pathname", (path) => path.split("/")[2].toLowerCase())
+                        id: getDataLayerId(),
+                        relatedCatalogObjects: {
+                            Category: ["health-insurance"]
+                        }
                     }
                 }
             },
@@ -266,7 +280,7 @@ SalesforceInteractions.init({
                     name: SalesforceInteractions.CatalogObjectInteractionName.ViewCatalogObject,
                     catalogObject: {
                         type: "Product",
-                        id: SalesforceInteractions.resolvers.fromWindow("location.pathname", (path) => path.split("/")[2].toLowerCase())
+                        id: getDataLayerId()
                     }
                 }
             },
@@ -309,7 +323,6 @@ SalesforceInteractions.init({
                 interaction: {name: "View Quote - About"},
                 listeners: [
                     SalesforceInteractions.listener("click", "form button[type=submit]", () => {
-                        console.log("Next button clicked");
                         const firstName = String(SalesforceInteractions.cashDom("input#firstName").val().trim());
                         const lastName = String(SalesforceInteractions.cashDom("input#lastName").val().trim());
                         const dob = String(SalesforceInteractions.cashDom("input#dob").val().trim());
@@ -319,13 +332,13 @@ SalesforceInteractions.init({
                         if(firstName && lastName && dob && mobile && emailAddress && residentialAddress){
                             SalesforceInteractions.sendEvent({
                                 interaction: {
-                                    name: "About you"
+                                    name: "About you - details"
                                 },
                                 user: {
                                     identities: {
                                         firstName: firstName,
                                         lastName: lastName,
-                                        dob: dob,
+                                        birthDate: dob,
                                         mobile: mobile,
                                         emailAddress: emailAddress,
                                         residentialAddress: residentialAddress
